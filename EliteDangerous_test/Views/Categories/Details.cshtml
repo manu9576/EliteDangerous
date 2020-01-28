@@ -1,0 +1,35 @@
+﻿@model EliteDangerous_test.Models.Category
+
+@{
+    ViewBag.Title = "Category details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>Detail of system :</h4>
+    <h1>@Html.DisplayFor(model => model.Name)</h1>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.Commodities)
+        </dt>
+
+        
+        <dd>
+            @foreach (EliteDangerous_test.Models.Commodities commodity in Model.Commodities)
+            {
+                @Html.ActionLink(commodity.name, "Details", "Commodities", new { id = commodity.Id }, null)
+                <br/>
+            }
+
+        </dd>
+
+    </dl>
+</div>
+<p>
+   
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,22 @@
+﻿@model EliteDangerous_test.Models.ViewAbout
+
+@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>This site is develop in ASP.NET MVC, using EntityFrameWork.</p>
+
+
+<p>There is @Model.CategoryCount categories</p>
+
+<p>There is @Model.CommoditiesCount commodities</p>
+
+<p>There is @Model.ListingsCount listings</p>
+
+<p>There is @Model.StationsCount stations</p>
+
+<p>There is @Model.SystemsCount systems</p>
+
+<p>The data is import from <a href="https://eddb.io/" >eddb.io</a></p>

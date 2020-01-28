@@ -1,0 +1,133 @@
+﻿@model EliteDangerous_test.Models.ViewStationsIndex
+
+@{
+    ViewBag.Title = "Stations list";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("First 20", "Index", new { id = 1 }) |
+    @Html.ActionLink("Previous 20", "Index", new { id = Model.Stations.First().Id - 20 })|
+    @Html.DisplayFor(model => Model.Stations.First().Id) |
+    @Html.ActionLink("Next 20", "Index", new { id = Model.Stations.First().Id + 20 })|
+    @Html.ActionLink("Last 20", "Index", new { id = Model.StationCount - 20 })
+</p>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Stations.First().name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stations.First().max_landing_pad_size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stations.First().distance_to_star)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stations.First().faction)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stations.First().government)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stations.First().allegiance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stations.First().state)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stations.First().type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stations.First().has_blackmarket)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stations.First().has_commodities)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stations.First().has_refuel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stations.First().has_repair)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stations.First().has_rearm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stations.First().has_outfitting)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stations.First().has_shipyard)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stations.First().updated_at)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stations.First().Systems.name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Stations) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.name, "Details", new { id = item.Id })
+           
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.max_landing_pad_size)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.distance_to_star)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.faction)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.government)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.allegiance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.state)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.has_blackmarket)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.has_commodities)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.has_refuel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.has_repair)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.has_rearm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.has_outfitting)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.has_shipyard)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.updated_at)
+        </td>
+        <td>
+            @Html.ActionLink(item.Systems.name, "Details", "Systems", new { id = item.system_id }, null)
+        </td>
+
+    </tr>
+}
+
+</table>

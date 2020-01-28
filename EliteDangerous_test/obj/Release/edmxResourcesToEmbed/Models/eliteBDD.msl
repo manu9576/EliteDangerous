@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EliteDangerousModelStoreContainer" CdmEntityContainer="EliteDangerousEntities">
+    <EntitySetMapping Name="Category">
+      <EntityTypeMapping TypeName="EliteDangerousModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Commodities">
+      <EntityTypeMapping TypeName="EliteDangerousModel.Commodities">
+        <MappingFragment StoreEntitySet="Commodities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="average_price" ColumnName="average_price" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="export_commodities">
+      <EntityTypeMapping TypeName="EliteDangerousModel.export_commodities">
+        <MappingFragment StoreEntitySet="export_commodities">
+          <ScalarProperty Name="Id_Station" ColumnName="Id_Station" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="import_commodities">
+      <EntityTypeMapping TypeName="EliteDangerousModel.import_commodities">
+        <MappingFragment StoreEntitySet="import_commodities">
+          <ScalarProperty Name="Id_Station" ColumnName="Id_Station" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="listings">
+      <EntityTypeMapping TypeName="EliteDangerousModel.listings">
+        <MappingFragment StoreEntitySet="listings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="station_id" ColumnName="station_id" />
+          <ScalarProperty Name="commodity_id" ColumnName="commodity_id" />
+          <ScalarProperty Name="supply" ColumnName="supply" />
+          <ScalarProperty Name="buy_price" ColumnName="buy_price" />
+          <ScalarProperty Name="sell_price" ColumnName="sell_price" />
+          <ScalarProperty Name="demand" ColumnName="demand" />
+          <ScalarProperty Name="collected_at" ColumnName="collected_at" />
+          <ScalarProperty Name="update_count" ColumnName="update_count" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="prohibited_commodities">
+      <EntityTypeMapping TypeName="EliteDangerousModel.prohibited_commodities">
+        <MappingFragment StoreEntitySet="prohibited_commodities">
+          <ScalarProperty Name="Id_Station" ColumnName="Id_Station" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Station">
+      <EntityTypeMapping TypeName="EliteDangerousModel.Station">
+        <MappingFragment StoreEntitySet="Station">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="system_id" ColumnName="system_id" />
+          <ScalarProperty Name="max_landing_pad_size" ColumnName="max_landing_pad_size" />
+          <ScalarProperty Name="distance_to_star" ColumnName="distance_to_star" />
+          <ScalarProperty Name="faction" ColumnName="faction" />
+          <ScalarProperty Name="government" ColumnName="government" />
+          <ScalarProperty Name="allegiance" ColumnName="allegiance" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="has_blackmarket" ColumnName="has_blackmarket" />
+          <ScalarProperty Name="has_commodities" ColumnName="has_commodities" />
+          <ScalarProperty Name="has_refuel" ColumnName="has_refuel" />
+          <ScalarProperty Name="has_repair" ColumnName="has_repair" />
+          <ScalarProperty Name="has_rearm" ColumnName="has_rearm" />
+          <ScalarProperty Name="has_outfitting" ColumnName="has_outfitting" />
+          <ScalarProperty Name="has_shipyard" ColumnName="has_shipyard" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Station_lite">
+      <EntityTypeMapping TypeName="EliteDangerousModel.Station_lite">
+        <MappingFragment StoreEntitySet="Station_lite">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="system_id" ColumnName="system_id" />
+          <ScalarProperty Name="max_landing_pad_size" ColumnName="max_landing_pad_size" />
+          <ScalarProperty Name="distance_to_star" ColumnName="distance_to_star" />
+          <ScalarProperty Name="faction" ColumnName="faction" />
+          <ScalarProperty Name="government" ColumnName="government" />
+          <ScalarProperty Name="allegiance" ColumnName="allegiance" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="has_blackmarket" ColumnName="has_blackmarket" />
+          <ScalarProperty Name="has_commodities" ColumnName="has_commodities" />
+          <ScalarProperty Name="has_refuel" ColumnName="has_refuel" />
+          <ScalarProperty Name="has_repair" ColumnName="has_repair" />
+          <ScalarProperty Name="has_rearm" ColumnName="has_rearm" />
+          <ScalarProperty Name="has_outfitting" ColumnName="has_outfitting" />
+          <ScalarProperty Name="has_shipyard" ColumnName="has_shipyard" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Systems">
+      <EntityTypeMapping TypeName="EliteDangerousModel.Systems">
+        <MappingFragment StoreEntitySet="Systems">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="xyz" ColumnName="xyz" />
+          <ScalarProperty Name="faction" ColumnName="faction" />
+          <ScalarProperty Name="population" ColumnName="population" />
+          <ScalarProperty Name="government" ColumnName="government" />
+          <ScalarProperty Name="allegiance" ColumnName="allegiance" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="security" ColumnName="security" />
+          <ScalarProperty Name="primary_economy" ColumnName="primary_economy" />
+          <ScalarProperty Name="needs_permit" ColumnName="needs_permit" />
+          <ScalarProperty Name="power_control_faction" ColumnName="power_control_faction" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

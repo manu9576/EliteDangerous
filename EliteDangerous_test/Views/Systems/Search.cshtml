@@ -1,0 +1,129 @@
+﻿@model EliteDangerous_test.Models.ViewSystemsSearch
+
+    @{
+        ViewBag.Title = "Search";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>Search system</h2>
+
+<div id="tableauResultat">
+    @{
+        Html.RenderAction("SystemsList", new { id = ViewBag.Id });
+    }
+</div>
+
+    @using (Html.BeginForm())
+    {
+        if (Model != null && Model.SearchCritere != null)
+        {
+            <input type="text" id="Comments" , name="Critere" value=@Model.SearchCritere />
+        }
+        else
+        {
+            <input type="text" id="Comments" , name="Critere" value="" />
+        }
+        <input type="submit" value="Search" name="critere1" />
+    }
+
+    @if (Model != null && Model.Systems != null)
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Systems.First().name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Systems.First().XYZ)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Systems.First().faction)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Systems.First().population)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Systems.First().government)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Systems.First().allegiance)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Systems.First().state)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Systems.First().Station)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Systems.First().security)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Systems.First().primary_economy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Systems.First().needs_permit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Systems.First().power_control_faction)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Systems.First().updated_at)
+                </th>
+
+                <th></th>
+            </tr>
+
+
+            @foreach (var item in Model.Systems)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.name, "Details", new { id = item.Id })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.XYZ)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.faction)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.population)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.government)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.allegiance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.state)
+                    </td>
+                    <td>
+                        @foreach (var station in item.Station)
+                        {
+                            @Html.ActionLink(station.name, "Details", "Stations", new { id = station.Id }, null)
+                            <br />
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.security)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.primary_economy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.needs_permit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.power_control_faction)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.updated_at)
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+    }

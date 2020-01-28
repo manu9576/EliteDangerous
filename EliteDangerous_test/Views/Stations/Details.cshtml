@@ -1,0 +1,167 @@
+﻿@model EliteDangerous_test.Models.Station
+
+@{
+    ViewBag.Title = "Station details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>Detail of station :</h4>
+    <h1>@Html.DisplayFor(model => model.name)</h1>
+
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.max_landing_pad_size)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.max_landing_pad_size)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.distance_to_star)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.distance_to_star)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.faction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.faction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.government)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.government)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.allegiance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.allegiance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.state)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.state)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.has_blackmarket)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.has_blackmarket)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.has_commodities)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.has_commodities)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.has_refuel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.has_refuel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.has_repair)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.has_repair)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.has_rearm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.has_rearm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.has_outfitting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.has_outfitting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.has_shipyard)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.has_shipyard)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updated_at)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updated_at)
+        </dd>
+
+        <dt>
+
+            System name
+        </dt>
+
+        <dd>
+            @Html.ActionLink(Model.Systems.name, "Details", "Systems", new { id = Model.Systems.Id }, null)
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => Model.listings)
+
+        </dt>
+
+        <dd>
+            @foreach (EliteDangerous_test.Models.listings listing in Model.listings)
+            {
+                @listing.Commodities.name
+                <span>  buy : </span>
+                @listing.buy_price
+                <span> sell:</span>
+                @listing.sell_price
+                <br />
+            }
+
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,66 @@
+﻿@model EliteDangerous_test.Models.Commodities
+
+@{
+    ViewBag.Title = "Commodity details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <h4>Detail of system :</h4>
+    <h1>@Html.DisplayFor(model => model.name)</h1>
+    <hr />
+
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.average_price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.average_price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </dt>
+
+        <dd>
+           @Html.ActionLink(Model.Category.Name, "Details", "Categories", new { id = Model.Category.Id }, null)
+        </dd>
+
+        <dt>
+            Best buying price:
+        </dt>
+
+        <dd>
+            @foreach (EliteDangerous_test.Models.listings listing in Model.listings.OrderByDescending(l => l.buy_price).Take(10))
+            {
+                @listing.buy_price
+                <span> at </span>
+                @Html.ActionLink(listing.Station.name, "Details", "Stations", new { id = listing.Station.Id }, null)
+                <br />
+            }
+        </dd>
+
+        <dt>
+            Best selling price:
+        </dt>
+
+        <dd>
+            @foreach (EliteDangerous_test.Models.listings listing in Model.listings.OrderBy(l => l.sell_price).Where(l=> l.sell_price != 0).Take(10))
+            {
+                @listing.sell_price
+                <span> at </span>
+                @Html.ActionLink(listing.Station.name, "Details", "Stations", new { id = listing.Station.Id }, null)
+                <br />
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    
+    @Html.ActionLink("Back to List", "Index")
+</p>

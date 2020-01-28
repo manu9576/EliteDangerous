@@ -1,0 +1,705 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EliteDangerousModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Commodities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="average_price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="category_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="export_commodities">
+          <Key>
+            <PropertyRef Name="Id_Station" />
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="Id_Station" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="import_commodities">
+          <Key>
+            <PropertyRef Name="Id_Station" />
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="Id_Station" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="listings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="station_id" Type="int" Nullable="false" />
+          <Property Name="commodity_id" Type="int" Nullable="false" />
+          <Property Name="supply" Type="int" Nullable="false" />
+          <Property Name="buy_price" Type="int" Nullable="false" />
+          <Property Name="sell_price" Type="int" Nullable="false" />
+          <Property Name="demand" Type="int" />
+          <Property Name="collected_at" Type="datetime" />
+          <Property Name="update_count" Type="int" />
+        </EntityType>
+        <EntityType Name="prohibited_commodities">
+          <Key>
+            <PropertyRef Name="Id_Station" />
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="Id_Station" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Station">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="50" />
+          <Property Name="system_id" Type="int" />
+          <Property Name="max_landing_pad_size" Type="nchar" MaxLength="1" />
+          <Property Name="distance_to_star" Type="int" />
+          <Property Name="faction" Type="nchar" MaxLength="60" />
+          <Property Name="government" Type="nchar" MaxLength="50" />
+          <Property Name="allegiance" Type="nchar" MaxLength="20" />
+          <Property Name="state" Type="nchar" MaxLength="30" />
+          <Property Name="type" Type="nchar" MaxLength="50" />
+          <Property Name="has_blackmarket" Type="bit" />
+          <Property Name="has_commodities" Type="bit" />
+          <Property Name="has_refuel" Type="bit" />
+          <Property Name="has_repair" Type="bit" />
+          <Property Name="has_rearm" Type="bit" />
+          <Property Name="has_outfitting" Type="bit" />
+          <Property Name="has_shipyard" Type="bit" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Station_lite">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="50" />
+          <Property Name="system_id" Type="int" />
+          <Property Name="max_landing_pad_size" Type="nchar" MaxLength="1" />
+          <Property Name="distance_to_star" Type="int" />
+          <Property Name="faction" Type="nchar" MaxLength="60" />
+          <Property Name="government" Type="nchar" MaxLength="50" />
+          <Property Name="allegiance" Type="nchar" MaxLength="20" />
+          <Property Name="state" Type="nchar" MaxLength="30" />
+          <Property Name="type" Type="nchar" MaxLength="50" />
+          <Property Name="has_blackmarket" Type="bit" />
+          <Property Name="has_commodities" Type="bit" />
+          <Property Name="has_refuel" Type="bit" />
+          <Property Name="has_repair" Type="bit" />
+          <Property Name="has_rearm" Type="bit" />
+          <Property Name="has_outfitting" Type="bit" />
+          <Property Name="has_shipyard" Type="bit" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Systems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="xyz" Type="geometry" Nullable="false" />
+          <Property Name="faction" Type="nchar" MaxLength="80" />
+          <Property Name="population" Type="bigint" />
+          <Property Name="government" Type="nchar" MaxLength="30" />
+          <Property Name="allegiance" Type="nchar" MaxLength="30" />
+          <Property Name="state" Type="nchar" MaxLength="30" />
+          <Property Name="security" Type="nchar" MaxLength="30" />
+          <Property Name="primary_economy" Type="nchar" MaxLength="20" />
+          <Property Name="needs_permit" Type="bit" />
+          <Property Name="power_control_faction" Type="nchar" MaxLength="50" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Commodities_ToCategory">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Commodities" Type="Self.Commodities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Commodities">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_export_commodities_ToCommodities' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_export_commodities_ToCommodities" />-->
+        <Association Name="FK_export_commodities_ToStation_lite">
+          <End Role="Station_lite" Type="Self.Station_lite" Multiplicity="1" />
+          <End Role="export_commodities" Type="Self.export_commodities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station_lite">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="export_commodities">
+              <PropertyRef Name="Id_Station" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_import_commodities_ToCommodities' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_import_commodities_ToCommodities" />-->
+        <Association Name="FK_import_commodities_ToStation_lite">
+          <End Role="Station_lite" Type="Self.Station_lite" Multiplicity="1" />
+          <End Role="import_commodities" Type="Self.import_commodities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station_lite">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="import_commodities">
+              <PropertyRef Name="Id_Station" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_listings_stationlite">
+          <End Role="Station" Type="Self.Station" Multiplicity="1" />
+          <End Role="listings" Type="Self.listings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="listings">
+              <PropertyRef Name="station_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_listings_ToCommodities">
+          <End Role="Commodities" Type="Self.Commodities" Multiplicity="1" />
+          <End Role="listings" Type="Self.listings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="listings">
+              <PropertyRef Name="commodity_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prohibited_commodities_ToStation_lite">
+          <End Role="Station_lite" Type="Self.Station_lite" Multiplicity="1" />
+          <End Role="prohibited_commodities" Type="Self.prohibited_commodities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station_lite">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="prohibited_commodities">
+              <PropertyRef Name="Id_Station" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_prohibited_commodities_ToTable' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_prohibited_commodities_ToTable" />-->
+        <Association Name="FK_Station_lite_ToTable">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="0..1" />
+          <End Role="Station_lite" Type="Self.Station_lite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Station_lite">
+              <PropertyRef Name="system_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Station_To_System">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="0..1" />
+          <End Role="Station" Type="Self.Station" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Station">
+              <PropertyRef Name="system_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EliteDangerousModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Commodities" EntityType="Self.Commodities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="export_commodities" EntityType="Self.export_commodities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="import_commodities" EntityType="Self.import_commodities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="listings" EntityType="Self.listings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="prohibited_commodities" EntityType="Self.prohibited_commodities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Station" EntityType="Self.Station" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Station_lite" EntityType="Self.Station_lite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Systems" EntityType="Self.Systems" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Commodities_ToCategory" Association="Self.FK_Commodities_ToCategory">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Commodities" EntitySet="Commodities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_export_commodities_ToStation_lite" Association="Self.FK_export_commodities_ToStation_lite">
+            <End Role="Station_lite" EntitySet="Station_lite" />
+            <End Role="export_commodities" EntitySet="export_commodities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_import_commodities_ToStation_lite" Association="Self.FK_import_commodities_ToStation_lite">
+            <End Role="Station_lite" EntitySet="Station_lite" />
+            <End Role="import_commodities" EntitySet="import_commodities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_listings_stationlite" Association="Self.FK_listings_stationlite">
+            <End Role="Station" EntitySet="Station" />
+            <End Role="listings" EntitySet="listings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_listings_ToCommodities" Association="Self.FK_listings_ToCommodities">
+            <End Role="Commodities" EntitySet="Commodities" />
+            <End Role="listings" EntitySet="listings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prohibited_commodities_ToStation_lite" Association="Self.FK_prohibited_commodities_ToStation_lite">
+            <End Role="Station_lite" EntitySet="Station_lite" />
+            <End Role="prohibited_commodities" EntitySet="prohibited_commodities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Station_lite_ToTable" Association="Self.FK_Station_lite_ToTable">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="Station_lite" EntitySet="Station_lite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Station_To_System" Association="Self.FK_Station_To_System">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="Station" EntitySet="Station" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EliteDangerousModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Commodities" Relationship="Self.FK_Commodities_ToCategory" FromRole="Category" ToRole="Commodities" />
+        </EntityType>
+        <EntityType Name="Commodities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="average_price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="category_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Commodities_ToCategory" FromRole="Commodities" ToRole="Category" />
+          <NavigationProperty Name="listings" Relationship="Self.FK_listings_ToCommodities" FromRole="Commodities" ToRole="listings" />
+        </EntityType>
+        <EntityType Name="export_commodities">
+          <Key>
+            <PropertyRef Name="Id_Station" />
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="Id_Station" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Station_lite" Relationship="Self.FK_export_commodities_ToStation_lite" FromRole="export_commodities" ToRole="Station_lite" />
+        </EntityType>
+        <EntityType Name="import_commodities">
+          <Key>
+            <PropertyRef Name="Id_Station" />
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="Id_Station" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Station_lite" Relationship="Self.FK_import_commodities_ToStation_lite" FromRole="import_commodities" ToRole="Station_lite" />
+        </EntityType>
+        <EntityType Name="listings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="station_id" Type="Int32" Nullable="false" />
+          <Property Name="commodity_id" Type="Int32" Nullable="false" />
+          <Property Name="supply" Type="Int32" Nullable="false" />
+          <Property Name="buy_price" Type="Int32" Nullable="false" />
+          <Property Name="sell_price" Type="Int32" Nullable="false" />
+          <Property Name="demand" Type="Int32" />
+          <Property Name="collected_at" Type="DateTime" Precision="3" />
+          <Property Name="update_count" Type="Int32" />
+          <NavigationProperty Name="Commodities" Relationship="Self.FK_listings_ToCommodities" FromRole="listings" ToRole="Commodities" />
+          <NavigationProperty Name="Station" Relationship="Self.FK_listings_stationlite" FromRole="listings" ToRole="Station" />
+        </EntityType>
+        <EntityType Name="prohibited_commodities">
+          <Key>
+            <PropertyRef Name="Id_Station" />
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="Id_Station" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Station_lite" Relationship="Self.FK_prohibited_commodities_ToStation_lite" FromRole="prohibited_commodities" ToRole="Station_lite" />
+        </EntityType>
+        <EntityType Name="Station">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="system_id" Type="Int32" />
+          <Property Name="max_landing_pad_size" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="distance_to_star" Type="Int32" />
+          <Property Name="faction" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="government" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="allegiance" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="has_blackmarket" Type="Boolean" />
+          <Property Name="has_commodities" Type="Boolean" />
+          <Property Name="has_refuel" Type="Boolean" />
+          <Property Name="has_repair" Type="Boolean" />
+          <Property Name="has_rearm" Type="Boolean" />
+          <Property Name="has_outfitting" Type="Boolean" />
+          <Property Name="has_shipyard" Type="Boolean" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="listings" Relationship="Self.FK_listings_stationlite" FromRole="Station" ToRole="listings" />
+          <NavigationProperty Name="Systems" Relationship="Self.FK_Station_To_System" FromRole="Station" ToRole="Systems" />
+        </EntityType>
+        <EntityType Name="Station_lite">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="system_id" Type="Int32" />
+          <Property Name="max_landing_pad_size" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="distance_to_star" Type="Int32" />
+          <Property Name="faction" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="government" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="allegiance" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="has_blackmarket" Type="Boolean" />
+          <Property Name="has_commodities" Type="Boolean" />
+          <Property Name="has_refuel" Type="Boolean" />
+          <Property Name="has_repair" Type="Boolean" />
+          <Property Name="has_rearm" Type="Boolean" />
+          <Property Name="has_outfitting" Type="Boolean" />
+          <Property Name="has_shipyard" Type="Boolean" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="export_commodities" Relationship="Self.FK_export_commodities_ToStation_lite" FromRole="Station_lite" ToRole="export_commodities" />
+          <NavigationProperty Name="import_commodities" Relationship="Self.FK_import_commodities_ToStation_lite" FromRole="Station_lite" ToRole="import_commodities" />
+          <NavigationProperty Name="prohibited_commodities" Relationship="Self.FK_prohibited_commodities_ToStation_lite" FromRole="Station_lite" ToRole="prohibited_commodities" />
+          <NavigationProperty Name="Systems" Relationship="Self.FK_Station_lite_ToTable" FromRole="Station_lite" ToRole="Systems" />
+        </EntityType>
+        <EntityType Name="Systems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="xyz" Type="Geometry" Nullable="false" />
+          <Property Name="faction" Type="String" MaxLength="80" FixedLength="true" Unicode="true" />
+          <Property Name="population" Type="Int64" />
+          <Property Name="government" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="allegiance" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="security" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="primary_economy" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="needs_permit" Type="Boolean" />
+          <Property Name="power_control_faction" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Station" Relationship="Self.FK_Station_To_System" FromRole="Systems" ToRole="Station" />
+          <NavigationProperty Name="Station_lite" Relationship="Self.FK_Station_lite_ToTable" FromRole="Systems" ToRole="Station_lite" />
+        </EntityType>
+        <Association Name="FK_Commodities_ToCategory">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Commodities" Type="Self.Commodities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Commodities">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_listings_ToCommodities">
+          <End Role="Commodities" Type="Self.Commodities" Multiplicity="1" />
+          <End Role="listings" Type="Self.listings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="listings">
+              <PropertyRef Name="commodity_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_export_commodities_ToStation_lite">
+          <End Role="Station_lite" Type="Self.Station_lite" Multiplicity="1" />
+          <End Role="export_commodities" Type="Self.export_commodities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station_lite">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="export_commodities">
+              <PropertyRef Name="Id_Station" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_import_commodities_ToStation_lite">
+          <End Role="Station_lite" Type="Self.Station_lite" Multiplicity="1" />
+          <End Role="import_commodities" Type="Self.import_commodities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station_lite">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="import_commodities">
+              <PropertyRef Name="Id_Station" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_listings_stationlite">
+          <End Role="Station" Type="Self.Station" Multiplicity="1" />
+          <End Role="listings" Type="Self.listings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="listings">
+              <PropertyRef Name="station_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prohibited_commodities_ToStation_lite">
+          <End Role="Station_lite" Type="Self.Station_lite" Multiplicity="1" />
+          <End Role="prohibited_commodities" Type="Self.prohibited_commodities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station_lite">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="prohibited_commodities">
+              <PropertyRef Name="Id_Station" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Station_To_System">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="0..1" />
+          <End Role="Station" Type="Self.Station" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Station">
+              <PropertyRef Name="system_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Station_lite_ToTable">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="0..1" />
+          <End Role="Station_lite" Type="Self.Station_lite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Station_lite">
+              <PropertyRef Name="system_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EliteDangerousEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Commodities" EntityType="Self.Commodities" />
+          <EntitySet Name="export_commodities" EntityType="Self.export_commodities" />
+          <EntitySet Name="import_commodities" EntityType="Self.import_commodities" />
+          <EntitySet Name="listings" EntityType="Self.listings" />
+          <EntitySet Name="prohibited_commodities" EntityType="Self.prohibited_commodities" />
+          <EntitySet Name="Station" EntityType="Self.Station" />
+          <EntitySet Name="Station_lite" EntityType="Self.Station_lite" />
+          <EntitySet Name="Systems" EntityType="Self.Systems" />
+          <AssociationSet Name="FK_Commodities_ToCategory" Association="Self.FK_Commodities_ToCategory">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Commodities" EntitySet="Commodities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_listings_ToCommodities" Association="Self.FK_listings_ToCommodities">
+            <End Role="Commodities" EntitySet="Commodities" />
+            <End Role="listings" EntitySet="listings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_export_commodities_ToStation_lite" Association="Self.FK_export_commodities_ToStation_lite">
+            <End Role="Station_lite" EntitySet="Station_lite" />
+            <End Role="export_commodities" EntitySet="export_commodities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_import_commodities_ToStation_lite" Association="Self.FK_import_commodities_ToStation_lite">
+            <End Role="Station_lite" EntitySet="Station_lite" />
+            <End Role="import_commodities" EntitySet="import_commodities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_listings_stationlite" Association="Self.FK_listings_stationlite">
+            <End Role="Station" EntitySet="Station" />
+            <End Role="listings" EntitySet="listings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prohibited_commodities_ToStation_lite" Association="Self.FK_prohibited_commodities_ToStation_lite">
+            <End Role="Station_lite" EntitySet="Station_lite" />
+            <End Role="prohibited_commodities" EntitySet="prohibited_commodities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Station_To_System" Association="Self.FK_Station_To_System">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="Station" EntitySet="Station" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Station_lite_ToTable" Association="Self.FK_Station_lite_ToTable">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="Station_lite" EntitySet="Station_lite" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EliteDangerousModelStoreContainer" CdmEntityContainer="EliteDangerousEntities">
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="EliteDangerousModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commodities">
+            <EntityTypeMapping TypeName="EliteDangerousModel.Commodities">
+              <MappingFragment StoreEntitySet="Commodities">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="average_price" ColumnName="average_price" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="export_commodities">
+            <EntityTypeMapping TypeName="EliteDangerousModel.export_commodities">
+              <MappingFragment StoreEntitySet="export_commodities">
+                <ScalarProperty Name="Id_Station" ColumnName="Id_Station" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="import_commodities">
+            <EntityTypeMapping TypeName="EliteDangerousModel.import_commodities">
+              <MappingFragment StoreEntitySet="import_commodities">
+                <ScalarProperty Name="Id_Station" ColumnName="Id_Station" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="listings">
+            <EntityTypeMapping TypeName="EliteDangerousModel.listings">
+              <MappingFragment StoreEntitySet="listings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="station_id" ColumnName="station_id" />
+                <ScalarProperty Name="commodity_id" ColumnName="commodity_id" />
+                <ScalarProperty Name="supply" ColumnName="supply" />
+                <ScalarProperty Name="buy_price" ColumnName="buy_price" />
+                <ScalarProperty Name="sell_price" ColumnName="sell_price" />
+                <ScalarProperty Name="demand" ColumnName="demand" />
+                <ScalarProperty Name="collected_at" ColumnName="collected_at" />
+                <ScalarProperty Name="update_count" ColumnName="update_count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="prohibited_commodities">
+            <EntityTypeMapping TypeName="EliteDangerousModel.prohibited_commodities">
+              <MappingFragment StoreEntitySet="prohibited_commodities">
+                <ScalarProperty Name="Id_Station" ColumnName="Id_Station" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Station">
+            <EntityTypeMapping TypeName="EliteDangerousModel.Station">
+              <MappingFragment StoreEntitySet="Station">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="system_id" ColumnName="system_id" />
+                <ScalarProperty Name="max_landing_pad_size" ColumnName="max_landing_pad_size" />
+                <ScalarProperty Name="distance_to_star" ColumnName="distance_to_star" />
+                <ScalarProperty Name="faction" ColumnName="faction" />
+                <ScalarProperty Name="government" ColumnName="government" />
+                <ScalarProperty Name="allegiance" ColumnName="allegiance" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="has_blackmarket" ColumnName="has_blackmarket" />
+                <ScalarProperty Name="has_commodities" ColumnName="has_commodities" />
+                <ScalarProperty Name="has_refuel" ColumnName="has_refuel" />
+                <ScalarProperty Name="has_repair" ColumnName="has_repair" />
+                <ScalarProperty Name="has_rearm" ColumnName="has_rearm" />
+                <ScalarProperty Name="has_outfitting" ColumnName="has_outfitting" />
+                <ScalarProperty Name="has_shipyard" ColumnName="has_shipyard" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Station_lite">
+            <EntityTypeMapping TypeName="EliteDangerousModel.Station_lite">
+              <MappingFragment StoreEntitySet="Station_lite">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="system_id" ColumnName="system_id" />
+                <ScalarProperty Name="max_landing_pad_size" ColumnName="max_landing_pad_size" />
+                <ScalarProperty Name="distance_to_star" ColumnName="distance_to_star" />
+                <ScalarProperty Name="faction" ColumnName="faction" />
+                <ScalarProperty Name="government" ColumnName="government" />
+                <ScalarProperty Name="allegiance" ColumnName="allegiance" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="has_blackmarket" ColumnName="has_blackmarket" />
+                <ScalarProperty Name="has_commodities" ColumnName="has_commodities" />
+                <ScalarProperty Name="has_refuel" ColumnName="has_refuel" />
+                <ScalarProperty Name="has_repair" ColumnName="has_repair" />
+                <ScalarProperty Name="has_rearm" ColumnName="has_rearm" />
+                <ScalarProperty Name="has_outfitting" ColumnName="has_outfitting" />
+                <ScalarProperty Name="has_shipyard" ColumnName="has_shipyard" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Systems">
+            <EntityTypeMapping TypeName="EliteDangerousModel.Systems">
+              <MappingFragment StoreEntitySet="Systems">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="xyz" ColumnName="xyz" />
+                <ScalarProperty Name="faction" ColumnName="faction" />
+                <ScalarProperty Name="population" ColumnName="population" />
+                <ScalarProperty Name="government" ColumnName="government" />
+                <ScalarProperty Name="allegiance" ColumnName="allegiance" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="security" ColumnName="security" />
+                <ScalarProperty Name="primary_economy" ColumnName="primary_economy" />
+                <ScalarProperty Name="needs_permit" ColumnName="needs_permit" />
+                <ScalarProperty Name="power_control_faction" ColumnName="power_control_faction" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
